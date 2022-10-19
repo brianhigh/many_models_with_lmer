@@ -16,7 +16,7 @@ if (!(exists("pdflatex_ver") & length(pdflatex_ver) > 0)) {
 }
 
 # Load devtools, installing as needed
-if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
 library(devtools)
 
 # Install packages
