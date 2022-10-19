@@ -28,7 +28,7 @@ inst_script <- "install_pkgs.R"
 # package versions used after our own R scripts were run:
 create_install_script <- function(si) {
   pkgs <- sapply(c(si$loadedOnly, si$otherPkgs), function(x) x$Version)
-  c(paste0("if (!require(devtools)) install.packages('devtools')"),
+  c(paste0("if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')"),
     paste0("library(devtools)"), 
     mapply(function(x, y) { 
       paste0("if (!try(packageVersion('", x, "')) == '", y, "') ", "\n  ",
