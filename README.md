@@ -9,7 +9,7 @@ This example is based on a [blog post by Dave Teng](https://davetang.org/muse/20
 - Build and run your docker container as follows:
 
 ```
-git clone git@github.com:brianhigh/many_models_with_lmer.git
+git clone https://github.com/brianhigh/many_models_with_lmer.git
 cd many_models_with_lmer
 mkdir -p $HOME/r_packages
 docker build -f Dockerfile .
