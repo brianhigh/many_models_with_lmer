@@ -11,6 +11,8 @@ RUN apt-get clean all && \
     libssl-dev \
     libxml2-dev \
     libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
     libxt-dev \
     zlib1g-dev \
     libbz2-dev \
@@ -32,4 +34,3 @@ RUN apt-get clean all && \
 COPY install_pkgs.R /home/rstudio/
 COPY many_models_with_lmer.Rmd /home/rstudio/
 COPY .Rprofile /home/rstudio/
-
