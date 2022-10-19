@@ -18,6 +18,7 @@ RUN apt-get clean all && \
     libglpk40 \
     libgit2-28 \
     libfontconfig1-dev \
+    libfribidi-dev \
     libharfbuzz-dev \
     libfreetype6-dev \
     libfreetype-dev \
