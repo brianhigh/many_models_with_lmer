@@ -51,6 +51,8 @@ For example, `install_pkgs.R` could be:
 if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
 library(devtools)
 
+if (!try(packageVersion('pacman')) == '0.5.1') 
+  install_version('pacman', version = '0.5.1', upgrade = FALSE)
 if (!try(packageVersion('knitr')) == '1.40') 
   install_version('knitr', version = '1.40', upgrade = FALSE)
 if (!try(packageVersion('kableExtra')) == '1.3.4') 
