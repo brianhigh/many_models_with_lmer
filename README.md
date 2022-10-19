@@ -47,7 +47,7 @@ If that makes the initial build take too long, you could also reduce the number 
 
 For example, `install_pkgs.R` could be:
 
----
+```
 if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
 library(devtools)
 
@@ -73,7 +73,7 @@ if (!try(packageVersion('tibble')) == '3.1.8')
   install_version('tibble', version = '3.1.8', upgrade = FALSE)
 if (!try(packageVersion('nycflights13')) == '1.0.2') 
   install_version('nycflights13', version = '1.0.2', upgrade = FALSE)
----
+```
 
 This would allow the dependencies to be installed with whatever versions R chooses, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
 
