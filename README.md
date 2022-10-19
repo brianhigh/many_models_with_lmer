@@ -1,5 +1,5 @@
 # many_models_with_lmer
-An example of using a Docker container to create an RStudio environment for reproducibility. This is one way to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. This allows others to reproduce our environment to verify our code runs as we intend it to.
+An example of using a Docker container to create an RStudio environment for reproducibility. This is one way to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. This allows others to reproduce our environment to verify our code runs for them as we intend it to.
 
 This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/) and has been tested on macOS 12.4 Monterey.
 
