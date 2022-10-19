@@ -14,9 +14,11 @@ cd many_models_with_lmer
 mkdir -p $HOME/r_packages
 docker build -f Dockerfile .
 docker build -t brianhigh/many_models_with_lmer
-docker run --rm -p 8888:8787 -d --name many_models 
+docker run --rm -p 8888:8787 -d \
+  --name many_models_with_lmer 
   -v $HOME/r_packages/:/packages 
-  -e PASSWORD=password -e USERID=$(id -u) -e GROUPID=$(id -g)
+  -e PASSWORD=password -e USERID=$(id -u) -e GROUPID=$(id -g) \
+  brianhigh/many_models_with_lmer
 ```
 
 - Open your web browser to http://localhost:8888/
