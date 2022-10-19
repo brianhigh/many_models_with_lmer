@@ -21,5 +21,6 @@ docker run --rm -p 8888:8787 -d --name many_models
 
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
-- In RStudio, run install_pkgs.R (takes awhile) then open many_models_with_lmer.Rmd and "knit"
-- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md)
+- In RStudio, run [install_pkgs.R](install_pkgs.R) (takes awhile) which was created by [install_versions.R](install_versions.R) 
+- In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "knit" button
+- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md) as a PDF file
