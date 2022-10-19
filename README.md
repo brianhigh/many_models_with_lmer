@@ -42,3 +42,6 @@ RUN Rscript --vanilla /home/rstudio/install_pkgs.R
 ```
 
 And then rebuild as described above. The R packages will install to `/usr/local/lib/R/site-library`. 
+
+If that makes the initial build take too long, you could also reduce the number of packages installed in `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). This would allow the dependencies to be installed with whatever version R chooses, which may add some flexibility over time, but may also mean that your R environment deviates too much from the original environment for your liking. So, that's a trade-off.
+
