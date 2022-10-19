@@ -6,7 +6,7 @@ This example is based on a [blog post by Dave Teng](https://davetang.org/muse/20
 ## Usage
 
 - Install [Docker](https://www.docker.com/products/docker-desktop/)
-- Build and run your docker container as follows:
+- Build and run your docker container from your Terminal as follows:
 
 ```
 git clone https://github.com/brianhigh/many_models_with_lmer.git
