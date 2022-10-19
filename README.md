@@ -7,10 +7,9 @@ This example is based on a [blog post by Dave Teng](https://davetang.org/muse/20
 
 - Install [git](https://git-scm.com/downloads) if you don't already have it
 - Install [Docker](https://www.docker.com/products/docker-desktop/) using the default settings as prompted
-- Build and run your docker container from your Terminal as follows:
+- Build and run your docker container from your Terminal (e.g., bash or Git-Bash on Windows) as follows:
 
 ```
-bash
 git clone https://github.com/brianhigh/many_models_with_lmer.git
 cd many_models_with_lmer
 mkdir -p $HOME/r_packages
