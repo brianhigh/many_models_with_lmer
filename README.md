@@ -34,3 +34,11 @@ docker run --rm -p 8888:8787 -d \
 - In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "Knit" button
 - If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md) as a PDF file
 - When you are done using RStudio, stop the container with: `docker stop many_models_with_lmer`
+
+If you would prefer to have the R packages installed into the container when building it, then add this line to the end of your `Dockerfile`:
+
+```
+RUN Rscript --vanilla /home/rstudio/install_pkgs.R
+```
+
+And then rebuild as described above. The R packages will install to `/usr/local/lib/R/site-library`. 
