@@ -23,6 +23,7 @@ docker run --rm -p 8888:8787 -d \
   brianhigh/many_models_with_lmer
 ```
 
+- If you operating system gives you security prompts to allow Docker, then choose to allow it
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
 - In RStudio, run [install_pkgs.R](install_pkgs.R) (takes awhile) which was created by [install_versions.R](install_versions.R) 
