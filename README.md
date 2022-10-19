@@ -1,7 +1,7 @@
 # many_models_with_lmer
 An example of using a Docker container to create an RStudio environment for reproducibility. This is one way to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. This allows others to reproduce our environment to verify our code runs as we intend it to.
 
-This example has been tested on macOS 12.4 Monterey.
+This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/) and has been tested on macOS 12.4 Monterey.
 
 ## Usage
 
@@ -21,5 +21,5 @@ docker run --rm -p 8888:8787 -d --name many_models
 
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
-- In RStudio, run install_pkgs.R (takes while) then open many_models_with_lmer.Rmd and "knit"
-- If all goes well, you will be prompted by your web browser to open the rendered output
+- In RStudio, run install_pkgs.R (takes awhile) then open many_models_with_lmer.Rmd and "knit"
+- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md)
