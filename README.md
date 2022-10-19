@@ -12,7 +12,7 @@ This example is based on a [blog post by Dave Teng](https://davetang.org/muse/20
 - Install [git](https://git-scm.com/downloads) if you don't already have it
 - Install [Docker](https://www.docker.com/products/docker-desktop/) using the default settings as prompted
 - Launch Docker Desktop, accept the terms if prompted (and if you agree to them, of course), and skip the tutorial
-- Build and run your docker container from your Terminal (e.g., bash or Git-Bash on Windows) as follows:
+- Build and run your docker container in Bash from your Terminal (e.g., bash on macOS/Linux, or Git-Bash on Windows) as follows:
 
 ```
 git clone https://github.com/brianhigh/many_models_with_lmer.git
