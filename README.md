@@ -43,5 +43,39 @@ RUN Rscript --vanilla /home/rstudio/install_pkgs.R
 
 And then rebuild as described above. The R packages will install to `/usr/local/lib/R/site-library`. 
 
-If that makes the initial build take too long, you could also reduce the number of packages installed in `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). This would allow the dependencies to be installed with whatever version R chooses, which may add some flexibility over time, but may also mean that your R environment deviates too much from the original environment for your liking. So, that's a trade-off.
+If that makes the initial build take too long, you could also reduce the number of packages installed in `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). 
+
+For example, `install_pkgs.R` could be:
+
+---
+# Load devtools, installing as needed
+if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
+library(devtools)
+
+# Install packages
+if (!try(packageVersion('knitr')) == '1.40') 
+  install_version('knitr', version = '1.40', upgrade = FALSE)
+if (!try(packageVersion('kableExtra')) == '1.3.4') 
+  install_version('kableExtra', version = '1.3.4', upgrade = FALSE)
+if (!try(packageVersion('tictoc')) == '1.0.1') 
+  install_version('tictoc', version = '1.0.1', upgrade = FALSE)
+if (!try(packageVersion('furrr')) == '0.2.3') 
+  install_version('furrr', version = '0.2.3', upgrade = FALSE)
+if (!try(packageVersion('purrr')) == '0.3.5') 
+  install_version('purrr', version = '0.3.5', upgrade = FALSE)
+if (!try(packageVersion('broom.mixed')) == '0.2.9.4') 
+  install_version('broom.mixed', version = '0.2.9.4', upgrade = FALSE)
+if (!try(packageVersion('lme4')) == '1.1-30') 
+  install_version('lme4', version = '1.1-30', upgrade = FALSE)
+if (!try(packageVersion('dplyr')) == '1.0.8') 
+  install_version('dplyr', version = '1.0.8', upgrade = FALSE)
+if (!try(packageVersion('tidyr')) == '1.2.0') 
+  install_version('tidyr', version = '1.2.0', upgrade = FALSE)
+if (!try(packageVersion('tibble')) == '3.1.8') 
+  install_version('tibble', version = '3.1.8', upgrade = FALSE)
+if (!try(packageVersion('nycflights13')) == '1.0.2') 
+  install_version('nycflights13', version = '1.0.2', upgrade = FALSE)
+---
+
+This would allow the dependencies to be installed with whatever versions R chooses, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
 
