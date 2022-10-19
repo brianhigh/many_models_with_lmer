@@ -3,7 +3,7 @@ An example of using a Docker container to create an RStudio environment for repr
 
 This is one way to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. This allows others to reproduce our [Linux R/Rstudio environment](https://hub.docker.com/r/rocker/rstudio/tags) to verify our code runs for them as we intend it to. 
 
-The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) specifies which R package versions to install. This script was created with a [helper script](install_versions.R) run on the original system that our [project R code](many_models_with_lmer.Rmd) was developed on. So, this method (very nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md).
+The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) specifies which R package versions to install. This script was created with a [helper script](install_versions.R) run on the original system that our [project R code](many_models_with_lmer.Rmd) was developed on. So, this method (very nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md). Our [Rmd file](https://github.com/deohs/coders/blob/main/demos/models/many_models_with_lmer.Rmd) came from the [DEOHS Coders](https://github.com/deohs/coders) repo.
 
 This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/). It has been tested on macOS 12.4 Monterey and Windows 10 build 19044.
 
