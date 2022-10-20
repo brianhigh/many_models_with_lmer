@@ -99,6 +99,8 @@ You can see a list of your "images" and their sizes with:
 docker image ls
 ```
 
+The image size for `brianhigh/many_models_with_lmer` as created above should be 2.88 GB.
+
 If you see some images listed that you know aren't needed, you can [prune](https://docs.docker.com/config/pruning/) them with:
 
 ```
