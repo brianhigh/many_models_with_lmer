@@ -37,9 +37,9 @@ res <- lapply(1:nrow(df), function(x) {
 })
 ```
 
-But if that's not enough, and you want to create a full "clone" development environment, try the procedure below.
+But if that's not enough, and you want to create a full "clone" development environment with Docker, try the procedure below.
 
-## Usage
+## Example development environment with Docker
 
 - Install [git](https://git-scm.com/downloads) (free download) if you don't already have it
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (free download) using the default settings as prompted
