@@ -15,14 +15,14 @@ if (!dir.exists(data_dir)) data_dir <- '.'
 csv_file <- 'package_versions.csv'
 csv_path <- file.path(data_dir, csv_file)
 
-if (!file.exists(csv_path) {
+if (!file.exists(csv_path)) {
   # Save package versions on original system
   si <- sessionInfo()
   df <- do.call('rbind', 
                 lapply(c(si$loadedOnly, si$otherPkgs), 
                        function(x) data.frame(x[c('Package', 'Version')])))
   write.csv(df, csv_path, row.names = FALSE)
-  print(paste("Copy", csv_path, "and this script to distination and run it.")
+  print(paste("Copy", csv_path, "and this script to distination and run it."))
 } else {
   # Load devtools, installing as needed
   if (!requireNamespace('devtools', quietly = TRUE)) 
