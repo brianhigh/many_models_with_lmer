@@ -26,6 +26,10 @@ RUN apt-get clean all && \
     libfreetype-dev \
     libglib2.0-dev \
     libcairo2-dev \
+    texlive-latex-base \
+    texlive-fonts-recommended \
+    texlive-fonts-extra \
+    texlive-latex-extra \
     cmake \
   && apt-get clean all && \
   apt-get purge && \
@@ -34,3 +38,6 @@ RUN apt-get clean all && \
 COPY install_pkgs.R /home/rstudio/
 COPY many_models_with_lmer.Rmd /home/rstudio/
 COPY .Rprofile /home/rstudio/
+COPY package_versions.csv /home/rstudio/
+RUN Rscript --vanilla /home/rstudio/install_pkgs.R
+

@@ -29,13 +29,21 @@ options(future.supportsMulticore.unstable = "quiet")
 
 ## Setup
 
+We will install LaTeX support for rendering PDFs, if not already present.
+
+```{r, results=FALSE, message=FALSE}
+# Install LaTeX environment (for rendering PDFs from RMarkdown, etc.)
+pdflatex_ver <- try(system("pdflatex -v", intern = T, wait = T), silent = T)
+pdflatex_ver <- grep("^pdfTeX", pdflatex_ver, value = T)
+if (!(exists("pdflatex_ver") & length(pdflatex_ver) > 0)) {
+  if (!requireNamespace("tinytex", quietly = TRUE)) install.packages("tinytex")
+  if (!dir.exists(tinytex::tinytex_root(error = F))) tinytex::install_tinytex()
+}
+```
+
 We will use the *broom.mixed* package to support `lmer()` from the *lme4* package.
 
-```{r}
-# Set lib path
-lib_path <- "/packages/"
-if (dir.exists(lib_path)) .libPaths(lib_path)
-
+```{r, results=FALSE, message=FALSE}
 # Install pacman if not installed.
 if (!requireNamespace("pacman", quietly = TRUE)) {
   install.packages('pacman', repos = 'https://cloud.r-project.org', quiet = TRUE)
@@ -56,7 +64,11 @@ suppressPackageStartupMessages(
     kableExtra
   )
 )
+```
 
+We will set the number of parallel "workers" to half the number of available CPU cores.
+
+```{r}
 # Show number of available CPU cores.
 availableCores()
 
