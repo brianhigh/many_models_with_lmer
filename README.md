@@ -7,6 +7,38 @@ The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package 
 
 This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/). It has been tested on macOS 12.4 Monterey and Windows 10 build 19044.
 
+## How to install the same package versions elsewhere
+
+If all you need to do is make sure you are using the same package versions on another system, then you can run your R code on the original system and then run this code to save the package versions to a CSV file:
+
+```
+# Save package versions on original system
+si <- sessionInfo()
+df <- do.call('rbind', 
+              lapply(c(si$loadedOnly, si$otherPkgs), 
+                     function(x) data.frame(x[c('Package', 'Version')])))
+write.csv(df, "package_versions.csv", row.names = FALSE)
+```
+
+Then you can copy that CSV file to the alternate system (running the same version of R) and run the following code to install those package versions:
+
+```
+# Load devtools, installing as needed, on "clone" system
+if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
+library(devtools)
+
+# Install package versions on "clone" system
+df <- read.csv("package_versions.csv")
+res <- lapply(1:nrow(df), function(x) {
+  pkg <- df$Package[x]
+  ver <- as.character(df$Version[x])
+  if (!try(packageVersion(pkg)) == ver)
+    install_version(pkg, version = ver, upgrade = FALSE)
+})
+```
+
+But if that's not enough, and you want to create a full "clone" development environment, try the procedure below.
+
 ## Usage
 
 - Install [git](https://git-scm.com/downloads) (free download) if you don't already have it
@@ -48,9 +80,11 @@ If that makes the initial build take too long, you could also reduce the number 
 For example, `install_pkgs.R` could be:
 
 ```
+# Load devtools, installing as needed\
 if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
 library(devtools)
 
+# Install packages
 if (!try(packageVersion('pacman')) == '0.5.1') 
   install_version('pacman', version = '0.5.1', upgrade = FALSE)
 if (!try(packageVersion('knitr')) == '1.40') 
