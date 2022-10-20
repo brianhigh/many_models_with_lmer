@@ -12,7 +12,12 @@
 # gfortran from: https://mac.r-project.org/tools/gfortran-8.2-Mojave.dmg
 # And, again for macOS, also install Homebrew from: https://brew.sh 
 # ... and with Homebrew install cmake, libpng and freetype (and maybe more)
-# Then close and re-open RStudio before proceeding.
+# Then close and re-open RStudio before proceeding. 
+# For Windows, install RTools for the version of R you are using:
+# https://cran.r-project.org/bin/windows/Rtools/
+# For Linux, you will need a number of development packages and system
+# libraries too numerous to mention here, and the names of which will
+# vary depending on which distribution and version of Linux you are using.
 
 # If you would rather not bother with all of the above installations, an 
 # alternative is to just install Docker to run RStudio Server as described here:
