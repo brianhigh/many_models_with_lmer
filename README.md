@@ -52,8 +52,7 @@ The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package 
 git clone https://github.com/brianhigh/many_models_with_lmer.git
 cd many_models_with_lmer
 mkdir -p $HOME/r_packages
-docker build -f Dockerfile .
-docker build -t brianhigh/many_models_with_lmer .
+docker build -f Dockerfile -t brianhigh/many_models_with_lmer .
 docker run --rm -p 8888:8787 -d \
   --name many_models_with_lmer \
   -v $HOME/r_packages/:/packages \
