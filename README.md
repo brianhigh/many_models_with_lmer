@@ -41,7 +41,7 @@ You can go a step further by creating a duplicate development environment in a [
 
 This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/). It has been tested on macOS 12.4 Monterey and Windows 10 build 19044.
 
-The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) specifies which R package versions to install. This script was created with a [helper script](install_versions.R) (and [another one](install_package_versions.R)) run on the original system that our [project R code](many_models_with_lmer.Rmd) was developed on. So, this method (very nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md). Our [Rmd file](https://github.com/deohs/coders/blob/main/demos/models/many_models_with_lmer.Rmd) came from the [DEOHS Coders](https://github.com/deohs/coders) repo.
+The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) which uses (or creates) a [CSV file](package_versions.csv) that specifies which R package versions to install. So, this method (nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md). Our [Rmd file](https://github.com/deohs/coders/blob/main/demos/models/many_models_with_lmer.Rmd) came from the [DEOHS Coders](https://github.com/deohs/coders) repo.
 
 - Install [git](https://git-scm.com/downloads) (free download) if you don't already have it
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (free download) using the default settings as prompted
