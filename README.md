@@ -9,7 +9,7 @@ This example is based on a [blog post by Dave Teng](https://davetang.org/muse/20
 
 ## How to install the same package versions elsewhere
 
-If all you need to do is make sure you are using the same package versions on another system, then you can run your R code on the original system and then run this code to save the package versions to a CSV file:
+If all you need to do is make sure you are using the same package versions on another system, then, in a fresh R session, you can run your R code on the original system and then run this code to save the package versions currently in use to a CSV file:
 
 ```
 # Save package versions on original system
