@@ -77,7 +77,7 @@ If you know you will not need LaTeX support in your container, or you would pref
     texlive-latex-extra \
 ```    
 
-This change will also decrease the storage requirements of the container, as some of those packages are rather large. The `texlive-fonts-extra` package, for example, may be 460 MB or larger. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
+This change will also decrease the storage requirements of the container. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
 
 To further speed up the build time, you may prefer to install the R packages from within RStudio *after* building the container. To do so, remove this line from the end of your `Dockerfile` and then rebuild (as described above):
 
