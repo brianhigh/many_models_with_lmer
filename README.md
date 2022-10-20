@@ -80,7 +80,7 @@ If that makes the initial build take too long, you could also reduce the number 
 For example, `install_pkgs.R` could be:
 
 ```
-# Load devtools, installing as needed\
+# Load devtools, installing as needed
 if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
 library(devtools)
 
