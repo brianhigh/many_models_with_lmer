@@ -104,3 +104,7 @@ If you see some images listed that you know aren't needed, you can [prune](https
 ```
 docker image prune
 ```
+
+## How do I update my code or packages to match changes on the original system?
+
+If you make any modifications to the original system that you wish to be replicated in your containerized "clone", then update your `Dockerfile` and related files accordingly, then rebuild your container as described above. If you are using a newer version of R, then refer to that version in the top of the `Dockerfile`. If you have updated your R code or R packages on the original system, then copy those updates to the files used to build your container and rebuild it. If you are sharing those files, as we are here on Github, then update your shared repository once you have confirmed that your Docker container is working properly. Basically, if the purpose of the Docker environment is to match your primary development environment, then you will need to keep the Docker environment updated.
