@@ -64,54 +64,21 @@ docker run --rm -p 8888:8787 -d \
 - If you operating system gives you security prompts to allow Docker, then choose to allow it
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
-- In RStudio, open [install_pkgs.R](install_pkgs.R) and press the "Source" button (takes awhile)
 - In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "Knit" button
-- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md) as a PDF file
+- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md)
 - When you are done using RStudio, stop the container with: `docker stop many_models_with_lmer`
 
-If you would prefer to have the R packages installed into the container when building it, then add this line to the end of your `Dockerfile`:
+## This takes too long to build!
+
+To speed up the build time, you may prefer to install the R packages from within RStudio *after* building the container. To do so, remove this line from the end of your `Dockerfile` and then rebuild (as described above):
 
 ```
 RUN Rscript --vanilla /home/rstudio/install_pkgs.R
 ```
 
-And then rebuild as described above. The R packages will install to `/usr/local/lib/R/site-library`. 
+Then run `install_pkgs.R` from within RStudio (running within your container). The R packages should install to `/packages/`, or whatever your .libPath() is set to, instead of `/usr/local/lib/R/site-library`. 
 
-If that makes the initial build take too long, you could also reduce the number of packages installed in `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). 
+If that still takes too long, then you could also reduce the number of packages installed by `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). That is you could edit `package_versions.csv` to only include those specific packages which your R code (e.g., the Rmd) needs to be attached (loaded) in order to run. This package list will usually match names(sessionInfo()$otherPkgs) after you have attached the packages needed to run your R code.
 
-For example, `install_pkgs.R` could be:
-
-```
-# Load devtools, installing as needed
-if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')
-library(devtools)
-
-# Install packages
-if (!try(packageVersion('pacman')) == '0.5.1') 
-  install_version('pacman', version = '0.5.1', upgrade = FALSE)
-if (!try(packageVersion('knitr')) == '1.40') 
-  install_version('knitr', version = '1.40', upgrade = FALSE)
-if (!try(packageVersion('kableExtra')) == '1.3.4') 
-  install_version('kableExtra', version = '1.3.4', upgrade = FALSE)
-if (!try(packageVersion('tictoc')) == '1.0.1') 
-  install_version('tictoc', version = '1.0.1', upgrade = FALSE)
-if (!try(packageVersion('furrr')) == '0.2.3') 
-  install_version('furrr', version = '0.2.3', upgrade = FALSE)
-if (!try(packageVersion('purrr')) == '0.3.5') 
-  install_version('purrr', version = '0.3.5', upgrade = FALSE)
-if (!try(packageVersion('broom.mixed')) == '0.2.9.4') 
-  install_version('broom.mixed', version = '0.2.9.4', upgrade = FALSE)
-if (!try(packageVersion('lme4')) == '1.1-30') 
-  install_version('lme4', version = '1.1-30', upgrade = FALSE)
-if (!try(packageVersion('dplyr')) == '1.0.8') 
-  install_version('dplyr', version = '1.0.8', upgrade = FALSE)
-if (!try(packageVersion('tidyr')) == '1.2.0') 
-  install_version('tidyr', version = '1.2.0', upgrade = FALSE)
-if (!try(packageVersion('tibble')) == '3.1.8') 
-  install_version('tibble', version = '3.1.8', upgrade = FALSE)
-if (!try(packageVersion('nycflights13')) == '1.0.2') 
-  install_version('nycflights13', version = '1.0.2', upgrade = FALSE)
-```
-
-This would allow the dependencies to be installed with whatever versions R chooses, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
+This would allow the dependencies to be installed with the most recent version supported by your version of R, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
 
