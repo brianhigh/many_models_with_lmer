@@ -1,15 +1,11 @@
 # many_models_with_lmer (containerized)
 An example of using a Docker container to create an RStudio environment for reproducibility. 
 
-This is one way to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. This allows others to reproduce our [Linux R/Rstudio environment](https://hub.docker.com/r/rocker/rstudio/tags) to verify our code runs for them as we intend it to. 
-
-The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) specifies which R package versions to install. This script was created with a [helper script](install_versions.R) (and [another one](install_package_versions.R)) run on the original system that our [project R code](many_models_with_lmer.Rmd) was developed on. So, this method (very nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md). Our [Rmd file](https://github.com/deohs/coders/blob/main/demos/models/many_models_with_lmer.Rmd) came from the [DEOHS Coders](https://github.com/deohs/coders) repo.
-
-This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/). It has been tested on macOS 12.4 Monterey and Windows 10 build 19044.
+There are a few ways to create an R environment for a specific version of R with specific versions of the packages known to work with our own R code. One of which is using [Docker](https://www.docker.com) containers. Doing so allows others to reproduce our [Linux R/Rstudio environment](https://hub.docker.com/r/rocker/rstudio/tags) to verify our code runs for them as we intend it to. 
 
 ## How to install the same package versions elsewhere
 
-If all you need to do is make sure you are using the same package versions on another system, then, in a fresh R session, you can run your R code on the original system and then run this code to save the package versions currently in use to a CSV file:
+However, if all you really want to do is make sure you are using the same package versions on another system, then, in a fresh R session, you can run your R code on the original system and then run this code to save the package versions currently in use to a CSV file:
 
 ```
 # Save package versions on original system
@@ -40,6 +36,12 @@ res <- lapply(1:nrow(df), function(x) {
 But if that's not enough, and you want to create a full "clone" development environment with Docker, try the procedure below.
 
 ## Example development environment with Docker
+
+You can go a step further by creating a duplicate development environment in a [Docker](https://www.docker.com) container as described below.
+
+This example is based on a [blog post by Dave Teng](https://davetang.org/muse/2021/04/24/running-rstudio-server-with-docker/). It has been tested on macOS 12.4 Monterey and Windows 10 build 19044.
+
+The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package install script](install_pkgs.R) specifies which R package versions to install. This script was created with a [helper script](install_versions.R) (and [another one](install_package_versions.R)) run on the original system that our [project R code](many_models_with_lmer.Rmd) was developed on. So, this method (very nearly) reproduces the original R environment for running our project R code, to allow someone to reproduce our [results](many_models_with_lmer.md). Our [Rmd file](https://github.com/deohs/coders/blob/main/demos/models/many_models_with_lmer.Rmd) came from the [DEOHS Coders](https://github.com/deohs/coders) repo.
 
 - Install [git](https://git-scm.com/downloads) (free download) if you don't already have it
 - Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) (free download) using the default settings as prompted
