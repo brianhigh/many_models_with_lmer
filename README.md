@@ -75,7 +75,7 @@ To speed up the build time, you may prefer to install the R packages from within
 RUN Rscript --vanilla /home/rstudio/install_pkgs.R
 ```
 
-Then run `install_pkgs.R` from within RStudio (running within your container). The R packages should install to `/packages/`, or whatever your .libPath() is set to, instead of `/usr/local/lib/R/site-library`. 
+Then run `install_pkgs.R` from within RStudio (running within your container). The R packages should install to `/packages/`, or whatever your `.libPath()` is set to, instead of `/usr/local/lib/R/site-library`. 
 
 If that still takes too long, then you could also reduce the number of packages installed by `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). That is you could edit `package_versions.csv` to only include those specific packages which your R code (e.g., the Rmd) needs to be attached (loaded) in order to run. This package list will usually match names(sessionInfo()$otherPkgs) after you have attached the packages needed to run your R code.
 
