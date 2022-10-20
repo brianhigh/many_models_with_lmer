@@ -28,7 +28,6 @@ RUN apt-get clean all && \
     libcairo2-dev \
     texlive-latex-base \
     texlive-fonts-recommended \
-    texlive-fonts-extra \
     texlive-latex-extra \
     cmake \
   && apt-get clean all && \
