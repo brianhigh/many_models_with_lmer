@@ -90,3 +90,17 @@ Then run `install_pkgs.R` from within RStudio (running within your container). T
 If that still takes too long, then you could also reduce the number of packages installed by `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). That is, you could edit `package_versions.csv` to only include those specific packages which your R code (e.g., the Rmd) needs to be attached (loaded) in order to run. This package list will usually match `names(sessionInfo()$otherPkgs)` after you have attached the packages needed to run your R code.
 
 This would allow the dependencies to be installed with the most recent versions supported by your version of R, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
+
+## How much space is my container using?
+
+You can see a list of your "images" and their sizes with:
+
+```
+docker image ls
+```
+
+If you some some listed that you know aren't needed, you can "prune" them with:
+
+```
+docker image prune
+```
