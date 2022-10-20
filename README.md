@@ -99,7 +99,7 @@ You can see a list of your "images" and their sizes with:
 docker image ls
 ```
 
-If you some some listed that you know aren't needed, you can "prune" them with:
+If you see some images listed that you know aren't needed, you can [prune](https://docs.docker.com/config/pruning/) them with:
 
 ```
 docker image prune
