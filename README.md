@@ -69,7 +69,18 @@ docker run --rm -p 8888:8787 -d \
 
 ## This takes too long to build!
 
-To speed up the build time, you may prefer to install the R packages from within RStudio *after* building the container. To do so, remove this line from the end of your `Dockerfile` and then rebuild (as described above):
+If you know you will not need LaTeX support in your container, or you would prefer to use the [TinyTeX](https://yihui.org/tinytex/) R package, then you can remove these lines from your `Dockerfile`:
+
+```
+    texlive-latex-base \
+    texlive-fonts-recommended \
+    texlive-fonts-extra \
+    texlive-latex-extra \
+```    
+
+This change will also decrease the storage requirements of the container, as some of those packages are rather large. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
+
+To further speed up the build time, you may prefer to install the R packages from within RStudio *after* building the container. To do so, remove this line from the end of your `Dockerfile` and then rebuild (as described above):
 
 ```
 RUN Rscript --vanilla /home/rstudio/install_pkgs.R
@@ -80,4 +91,3 @@ Then run `install_pkgs.R` from within RStudio (running within your container). T
 If that still takes too long, then you could also reduce the number of packages installed by `install_pkgs.R` to only those explicitly loaded in the project R code (e.g., your Rmd file). That is, you could edit `package_versions.csv` to only include those specific packages which your R code (e.g., the Rmd) needs to be attached (loaded) in order to run. This package list will usually match `names(sessionInfo()$otherPkgs)` after you have attached the packages needed to run your R code.
 
 This would allow the dependencies to be installed with the most recent versions supported by your version of R, which may add some flexibility over time, but may also mean that your R environment might deviate too much from the original environment for your liking. So, that's a trade-off to consider.
-
