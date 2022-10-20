@@ -27,27 +27,43 @@
 # FROM rocker/rstudio:4.1.3
 # ... Then you can install your R packages using the script generated below.
 
-# Define file path of the installation script for specific package versions
-inst_script <- "install_pkgs.R"
+# Save package names and versions to a CSV or, if this file exists, install
+# the package versions listed in it. This is for duplicating one R 
+# environment to another with the same R package versions.
 
-# The next section should be run on the original system to capture 
-# package versions used after our own R scripts were run:
-create_install_script <- function(si) {
-  pkgs <- sapply(c(si$loadedOnly, si$otherPkgs), function(x) x$Version)
-  c(paste0("if (!requireNamespace('devtools', quietly = TRUE)) install.packages('devtools')"),
-    paste0("library(devtools)"), 
-    mapply(function(x, y) { 
-      paste0("if (!try(packageVersion('", x, "')) == '", y, "') ", "\n  ",
-             "install_version('", x, "', version = '", y, "', upgrade = FALSE)")
-    }, names(pkgs), pkgs))
+# Set repository URL
+r <- getOption("repos")
+r["CRAN"] <- "https://cloud.r-project.org"
+options(repos = r)
+
+# Set data folder path
+data_dir <- '/home/rstudio'
+if (!dir.exists(data_dir)) data_dir <- '.'
+
+# Set data file path
+csv_file <- 'package_versions.csv'
+csv_path <- file.path(data_dir, csv_file)
+
+if (!file.exists(csv_path)) {
+  # Save package versions on original system
+  si <- sessionInfo()
+  df <- do.call('rbind', 
+                lapply(c(si$loadedOnly, si$otherPkgs), 
+                       function(x) data.frame(x[c('Package', 'Version')])))
+  write.csv(df, csv_path, row.names = FALSE)
+  print(paste("Copy", csv_path, "and this script to distination and run it."))
+} else {
+  # Load devtools, installing as needed
+  if (!requireNamespace('devtools', quietly = TRUE)) 
+    install.packages('devtools')
+  library(devtools)
+  
+  # Install package versions listed in CSV file
+  df <- read.csv(csv_path)
+  res <- lapply(1:nrow(df), function(x) {
+    pkg <- df$Package[x]
+    ver <- as.character(df$Version[x])
+    if (!try(packageVersion(pkg)) == ver)
+      install_version(pkg, version = ver, upgrade = FALSE)
+  })
 }
-if (!file.exists(inst_script)) 
-  writeLines(create_install_script(sessionInfo()), inst_script)
-
-# And that script should be copied to the destination system and run (see below)
-
-# Install packages
-if (file.exists(inst_script)) source(inst_script, echo = TRUE)
-
-
-
