@@ -60,7 +60,8 @@ docker run --rm -p 8888:8787 -d \
   brianhigh/many_models_with_lmer
 ```
 
-- If you operating system gives you security prompts to allow Docker, then choose to allow it
+- Be patient -- this build step can take up to 45 minutes (or more)
+- If your operating system gives you security prompts to allow Docker, then choose to allow it
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
 - In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "Knit" button
@@ -69,15 +70,24 @@ docker run --rm -p 8888:8787 -d \
 
 ## This takes too long to build!
 
-If you know you will not need LaTeX support in your container, or you would prefer to use the [TinyTeX](https://yihui.org/tinytex/) R package, then you can remove these lines from your `Dockerfile`:
+If you know you will not need LaTeX support in your container, or you would prefer to use the [TinyTeX](https://yihui.org/tinytex/) R package, then you can remove this line from your `Dockerfile`:
 
 ```
-    texlive-latex-base \
-    texlive-fonts-recommended \
     texlive-latex-extra \
 ```    
 
 This change will also decrease the storage requirements of the container. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
+
+There is an [R package](https://cran.r-project.org/web/packages/maketools/vignettes/sysdeps.html) that can help you identify which system packages to install if you have a working Linux system that can already run your R code. Try running the code below to generate a TXT file containing some (but not all) system packages that are required.
+
+```
+# Create a TXT file containing a list of Linux system package dependencies
+df <- read.csv('package_versions.csv')    # CSV file created by install_pkgs.R
+if (!requireNamespace('maketools', quietly = TRUE)) install.packages('maketools')
+syspkgs.df <- do.call('rbind', lapply(df$Package, maketools::package_sysdeps))
+syspkgs <- sort(unique(syspkgs.df$headers))
+writeLines(syspkgs, "system_packages.txt", sep = "\n")
+```
 
 To further speed up the build time, you may prefer to install the R packages from within RStudio *after* building the container. To do so, remove this line from the end of your `Dockerfile` and then rebuild (as described above):
 

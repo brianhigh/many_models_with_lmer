@@ -22,12 +22,7 @@ RUN apt-get clean all && \
     libfontconfig1-dev \
     libfribidi-dev \
     libharfbuzz-dev \
-    libfreetype6-dev \
     libfreetype-dev \
-    libglib2.0-dev \
-    libcairo2-dev \
-    texlive-latex-base \
-    texlive-fonts-recommended \
     texlive-latex-extra \
     cmake \
   && apt-get clean all && \
