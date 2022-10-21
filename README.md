@@ -52,7 +52,7 @@ The [Dockerfile](Dockerfile) specifies the R version (R-4.1.3) and the [package 
 git clone https://github.com/brianhigh/many_models_with_lmer.git
 cd many_models_with_lmer
 mkdir -p $HOME/r_packages
-docker build -f Dockerfile -t brianhigh/many_models_with_lmer .
+docker build -t brianhigh/many_models_with_lmer .
 docker run --rm -p 8888:8787 -d \
   --name many_models_with_lmer \
   -v $HOME/r_packages/:/packages \
@@ -76,7 +76,7 @@ If you know you will not need LaTeX support in your container, or you would pref
     texlive-latex-extra \
 ```    
 
-This change will also decrease the storage requirements of the container. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
+This change will also decrease the storage requirements of the container, as this package is about 100 MB in size. The same goes for some of the other system packages installed in the `Dockerfile`, in that you may not need all of them, or you may need others which are not listed. If you try to install an R package and you get a compiler error saying a `.h` file is missing, or there is a suggestion in the compiler output to install a "deb" package, then the "deb" package(s) listed may need to be installed into your container by listing it in your `Dockerfile` with the other system packages.
 
 There is an [R package](https://cran.r-project.org/web/packages/maketools/vignettes/sysdeps.html) that can help you identify which system packages to install if you have a working Linux system that can already run your R code. Try running the code below to generate a TXT file containing some (but not all) system packages that are required.
 
@@ -109,7 +109,7 @@ You can see a list of your "images" and their sizes with:
 docker image ls
 ```
 
-The image size for `brianhigh/many_models_with_lmer` as created above should be 2.88 GB.
+The image size for `brianhigh/many_models_with_lmer` as created above should be 2.87 GB.
 
 If you see some images listed that you know aren't needed, you can [prune](https://docs.docker.com/config/pruning/) them with:
 
