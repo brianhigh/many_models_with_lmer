@@ -1,7 +1,7 @@
 ---
 title: "Many Models with lme4::lmer() and broom.mixed::tidy()"
 author: "Brian High"
-date: "2022-10-17"
+date: "2022-10-24"
 output:
   pdf_document:
     fig_caption: yes
@@ -66,6 +66,8 @@ suppressPackageStartupMessages(
 )
 ```
 
+\newpage
+
 We will set the number of parallel "workers" to half the number of available CPU cores.
 
 ```{r}
@@ -110,6 +112,8 @@ Our dataset will be `flights` from the *nycflights13* package.
 data_df <- 
   flights %>% select(arr_delay, distance, air_time, month, carrier)
 ```
+
+\newpage
 
 ## Run the models
 
@@ -162,6 +166,8 @@ Display the results.
 results_df %>% knitr::kable(digits = 4) %>% kable_styling(font_size = 8)
 ```
 
+\newpage
+
 ### Compare confidence intervals
 
 Determine whether or not the two methods of calculating the confidence 
@@ -197,9 +203,12 @@ results_df <- formula_df %>%
 toc()
 ```
 
+\newpage
+
 Display the results.
 
 ```{r, fig.cap="Single pipeline processing."}
 # Note: Use kable_styling(full_width = TRUE) for HTML output.
 results_df %>% knitr::kable(digits = 4) %>% kable_styling(font_size = 10)
 ```
+

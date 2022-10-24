@@ -1,1 +1,1 @@
-.libPaths("/packages/")
+if (dir.exists("/packages/")) .libPaths("/packages/")
