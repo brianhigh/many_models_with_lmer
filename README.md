@@ -75,7 +75,7 @@ docker run --rm -p 8888:8787 -d \
 rmarkdown::render("many_models_with_lmer.Rmd", output_format = "pdf_document")
 ```
 
-- If all goes well, a PDF file will be generated containing the [rendered output](many_models_with_lmer.md)
+- If all goes well, a PDF file will be generated containing the [rendered output](many_models_with_lmer.pdf)
 - When you are done using RStudio, stop the container with: `docker stop many_models_with_lmer`
 
 ## This takes too long to build!
