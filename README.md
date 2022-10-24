@@ -69,8 +69,13 @@ docker run --rm -p 8888:8787 -d \
 - If your operating system gives you security prompts to allow Docker, then choose to allow it
 - Open your web browser to http://localhost:8888/
 - Login as 'rstudio' with password 'password' (or whichever you set it to above)
-- In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "Knit" button
-- If all goes well, you will be prompted by your web browser to open the [rendered output](many_models_with_lmer.md)
+- In RStudio, open [many_models_with_lmer.Rmd](many_models_with_lmer.Rmd) and press the "Knit" button or render from R with:
+
+```
+rmarkdown::render("many_models_with_lmer.Rmd", output_format = "pdf_document")
+```
+
+- If all goes well, a PDF file will be generated containing the [rendered output](many_models_with_lmer.md)
 - When you are done using RStudio, stop the container with: `docker stop many_models_with_lmer`
 
 ## This takes too long to build!
