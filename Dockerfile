@@ -1,6 +1,8 @@
 FROM rocker/rstudio:4.1.3
  
 MAINTAINER Brian High https://github.com/brianhigh/
+
+# From the Github repo: https://github.com/brianhigh/many_models_with_lmer
  
 RUN apt-get clean all && \
   apt-get update && \

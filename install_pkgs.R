@@ -1,6 +1,8 @@
 # Install packages for specific versions to duplicate an R environment on 
 # another system.
 
+# From the Github repo: https://github.com/brianhigh/many_models_with_lmer
+
 # The hard way...
 
 # First install the same version of R as on the original system, e.g., R-4.1.3:
