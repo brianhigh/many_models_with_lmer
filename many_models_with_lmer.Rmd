@@ -1,7 +1,7 @@
 ---
 title: "Many Models with lme4::lmer() and broom.mixed::tidy()"
 author: "Brian High"
-date: "2022-10-24"
+date: "2022-11-08"
 output:
   pdf_document:
     fig_caption: yes
